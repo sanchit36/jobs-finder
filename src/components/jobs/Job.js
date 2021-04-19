@@ -1,9 +1,12 @@
-import React from "react";
-import { Card, Badge } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Badge, Collapse, Button } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
+import UserForm from "./UserForm";
 
 export default function Job({ job, details }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <Card className="mb-3">
       <Card.Body>
@@ -39,8 +42,21 @@ export default function Job({ job, details }) {
           </Card.Text>
         )}
         {details && (
-          <div className="mt-4">
-            <ReactMarkdown source={job.description} />
+          <div className="my-4">
+            <Button
+              onClick={() => setOpen((prevOpen) => !prevOpen)}
+              variant="primary"
+            >
+              {open ? "Close" : "Apply"}
+            </Button>
+
+            <Collapse in={open}>
+              <div className="mt-4">
+                <UserForm />
+              </div>
+            </Collapse>
+
+            <ReactMarkdown className="mt-5" source={job.description} />
           </div>
         )}
       </Card.Body>
