@@ -1,6 +1,9 @@
 import JobsActionTypes from "./jobs.types";
 import axios from "axios";
 
+/*
+  proxy the base url with cors-anywhere deployed on my heroku account so loading can the more time
+*/
 const BASE_URL =
   "https://protected-cliffs-15886.herokuapp.com/https://jobs.github.com/positions.json";
 
