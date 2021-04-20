@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import UserForm from "./UserForm";
 
 export default function Job({ job, details }) {
+  // handle the State of Application Form is Open or Closed
   const [open, setOpen] = useState(false);
 
   return (

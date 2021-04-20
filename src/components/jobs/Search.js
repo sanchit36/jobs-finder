@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import { clearJobs, fetchJobsAsync } from "../../redux/jobs/jobs.actions";
+import { selectCurrentJobs } from "../../redux/jobs/jobs.selectors";
 
 const Search = ({ jobs, fetchJobs, clearJobs }) => {
   const [text, setText] = useState("");
@@ -44,10 +46,9 @@ const Search = ({ jobs, fetchJobs, clearJobs }) => {
   );
 };
 
-const mapStateToProps = ({ jobs: { jobs } }) => ({
-  jobs,
+const mapStateToProps = createStructuredSelector({
+  jobs: selectCurrentJobs,
 });
-
 const mapDispatchToProps = (dispatch) => ({
   fetchJobs: (text) => dispatch(fetchJobsAsync(text)),
   clearJobs: () => dispatch(clearJobs()),

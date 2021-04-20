@@ -1,9 +1,15 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
+import { createStructuredSelector } from "reselect";
 import Job from "../components/jobs/Job";
 import Spinner from "../components/Spinner";
 import { fetchJobAsync } from "../redux/jobs/jobs.actions";
+import {
+  selectCurrentJob,
+  selectError,
+  selectLoading,
+} from "../redux/jobs/jobs.selectors";
 
 const JobDeatils = ({ job, loading, error, fetchJob }) => {
   const { id } = useParams();
@@ -26,10 +32,10 @@ const JobDeatils = ({ job, loading, error, fetchJob }) => {
   }
 };
 
-const mapStateToProps = ({ jobs: { job, loading, error } }) => ({
-  job,
-  loading,
-  error,
+const mapStateToProps = createStructuredSelector({
+  job: selectCurrentJob,
+  loading: selectLoading,
+  error: selectError,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -12,9 +12,11 @@ import { connect } from "react-redux";
 import { checkUserSession } from "./redux/user/user.actions";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import SuccessPage from "./pages/SuccessPage";
 
 function App({ currentUser, checkUserSession }) {
   useEffect(() => {
+    // dispatch a action to check user in localStorage and set it to currentUser
     checkUserSession();
   }, [checkUserSession]);
 
@@ -29,6 +31,7 @@ function App({ currentUser, checkUserSession }) {
             path="/login"
             render={() => (currentUser ? <Redirect to="/" /> : <LoginSignUp />)}
           />
+          <Route exact path="/success" component={SuccessPage} />
           <Route exact path="/jobs/:id" component={JobDeatils} />
         </Switch>
       </Container>

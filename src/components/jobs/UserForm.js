@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { setFormData } from "../../redux/form/form.actions";
 
 const UserForm = ({ setFormData }) => {
+  // handle The form State
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [letter, setLetter] = useState("");
   const [file, setFile] = useState("");
+
+  // give access to history object of react-router
+  let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +21,7 @@ const UserForm = ({ setFormData }) => {
     setEmail("");
     setLetter("");
     setFile("");
+    history.push("/success");
   };
 
   return (
