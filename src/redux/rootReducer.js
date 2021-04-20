@@ -14,7 +14,7 @@ import userReducer from "./user/user.reducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["jobs"],
+  whitelist: ["jobs", "form"],
 };
 
 const rootReducer = combineReducers({
