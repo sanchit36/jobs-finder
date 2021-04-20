@@ -1,7 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
+import { signOutAsync } from "../redux/user/user.actions";
+import { selectCurrentUser } from "../redux/user/user.selectors";
 
-const Navbar = () => {
+const Navbar = ({ currentUser, signOutStart }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -27,6 +31,23 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
+            {currentUser ? (
+              <li className="nav-item active">
+                <span
+                  style={{ cursor: "pointer" }}
+                  className="nav-link"
+                  onClick={signOutStart}
+                >
+                  logout
+                </span>
+              </li>
+            ) : (
+              <li className="nav-item active">
+                <Link className="nav-link" to="/login">
+                  Login/Signup
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -34,4 +55,12 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutAsync()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

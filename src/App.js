@@ -1,20 +1,34 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { Route, Switch } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import JobDeatils from "./pages/JobDeatils";
 
 import "./App.css";
+import LoginSignUp from "./pages/LoginSignUp";
+import { connect } from "react-redux";
+import { checkUserSession } from "./redux/user/user.actions";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/user/user.selectors";
 
-function App() {
+function App({ currentUser, checkUserSession }) {
+  useEffect(() => {
+    checkUserSession();
+  }, [checkUserSession]);
+
   return (
     <Fragment>
       <Navbar />
       <Container className="my-4">
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/login"
+            render={() => (currentUser ? <Redirect to="/" /> : <LoginSignUp />)}
+          />
           <Route exact path="/jobs/:id" component={JobDeatils} />
         </Switch>
       </Container>
@@ -22,4 +36,12 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
