@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Demo
 
-To view a demo , **[click here](https://simplfolio.netlify.com/)**\
+To view a demo , **[click here](https://job-finder-sanchit36.netlify.app/)**
 
 ## Library used
 
