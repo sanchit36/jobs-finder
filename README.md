@@ -15,11 +15,12 @@ To view a demo , **[click here](https://job-finder-sanchit36.netlify.app/)**
 ⚡️ Redux-thunk\
 ⚡️ Redux-persist\
 ⚡️ Reselect\
-⚡️ Axios
+⚡️ Axios\
+⚡️ Github API
 
 ## How To Use 🔧
 
-From your command line, first clone Simplefolio:
+From your command line, first clone Jobs Finder:
 
 ```bash
 # Clone this repository
